@@ -1,0 +1,39 @@
+name: Fedora Build
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Fedora 44 CMake debug build
+    runs-on: ubuntu-latest
+    container: fedora:44
+
+    steps:
+      - name: Install build dependencies
+        run: |
+          dnf install -y \
+            git cmake gcc-c++ pkgconf-pkg-config \
+            alsa-lib-devel freetype-devel fontconfig-devel libcurl-devel \
+            libX11-devel libXcomposite-devel libXcursor-devel libXext-devel \
+            libXinerama-devel libXrandr-devel libXrender-devel libXi-devel \
+            mesa-libEGL-devel mesa-libGL-devel gtk3-devel webkit2gtk4.1-devel
+
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Configure
+        run: cmake -S . -B cmake_build -DCMAKE_BUILD_TYPE=Debug
+
+      - name: Build
+        run: cmake --build cmake_build --config Debug --parallel 2
+
+      - name: Inspect binary dependencies
+        run: ldd cmake_build/A8Manager_artefacts/Debug/A8Manager
