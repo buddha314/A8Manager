@@ -33,7 +33,7 @@ jobs:
         run: cmake -S . -B cmake_build -DCMAKE_BUILD_TYPE=Release
 
       - name: Build
-        run: cmake --build cmake_build --config Release --parallel
+        run: cmake --build cmake_build --config Release --parallel 2
 
       - name: Inspect binary dependencies
         run: ldd cmake_build/A8Manager_artefacts/Release/A8Manager
