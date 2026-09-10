@@ -22,6 +22,20 @@ AppImage smoke result:
 - Runtime note: emitted `ALSA lib seq_hw.c:540:(snd_seq_hw_open) [error.sequencer] open /dev/snd/seq failed: No such file or directory` in this environment
 - Packaging note: appimagetool warned that AppStream upstream metadata is missing
 
+Flatpak manifest status:
+
+- Runtime branch selected from Flathub availability: Freedesktop Platform/SDK `26.08`
+- Manifest path: `packaging/linux/io.github.buddha314.A8Manager.yml`
+- Manifest validation completed: YAML parsed successfully with Ruby
+- Desktop metadata validation completed: `desktop-file-validate packaging/linux/io.github.buddha314.A8Manager.desktop`
+- Smoke-test blocker: `flatpak-builder` is not installed locally, and `sudo dnf install -y flatpak-builder` could not proceed because sudo requires an interactive password
+
+Upstreamable candidates:
+
+- Already isolated for possible later CPR PR: HTTPS submodule URLs and Fedora README build instructions from `linux-fedora-build-docs`
+- Possible future upstream candidate: generic CMake install rules if Flatpak/AppImage work proves they reduce packaging friction without changing application behavior
+- Keep fork-local unless CPR asks: `io.github.buddha314.A8Manager` app ID, AppImage/Flatpak manifests, OpenSpec process files, and release packaging workflow
+
 Observed runtime library dependencies from `ldd`:
 
 - `libfontconfig.so.1`
@@ -86,4 +100,5 @@ Packaging-sensitive runtime areas found in source:
 - The existing 514x514 PNG is an unusual icon size -> package scripts may need to resize/copy it into standard icon directories.
 - AppImage smoke in environments without `/dev/snd/seq` emits an ALSA sequencer warning -> include MIDI/audio device checks in manual Fedora validation.
 - AppImage/AppStream metadata is incomplete -> add metainfo before Flatpak release quality validation.
+- Flatpak smoke testing is blocked without `flatpak-builder` -> install `flatpak-builder` or test in a builder-capable container/toolbox before marking that task complete.
 - CI Debug builds prove compile/link compatibility but not Release packaging performance -> packaging tasks should run Release builds explicitly.

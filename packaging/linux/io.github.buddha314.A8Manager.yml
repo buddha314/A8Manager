@@ -1,0 +1,29 @@
+app-id: io.github.buddha314.A8Manager
+runtime: org.freedesktop.Platform
+runtime-version: '26.08'
+sdk: org.freedesktop.Sdk
+command: A8Manager
+
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --socket=pulseaudio
+  - --device=dri
+  - --device=all
+  - --filesystem=home
+  - --filesystem=/media
+  - --filesystem=/run/media
+
+modules:
+  - name: a8manager
+    buildsystem: simple
+    build-commands:
+      - cmake -S . -B cmake_build -DCMAKE_BUILD_TYPE=Release
+      - cmake --build cmake_build --config Release --parallel ${FLATPAK_BUILDER_N_JOBS}
+      - install -Dm755 cmake_build/A8Manager_artefacts/Release/A8Manager /app/bin/A8Manager
+      - install -Dm644 packaging/linux/io.github.buddha314.A8Manager.desktop /app/share/applications/io.github.buddha314.A8Manager.desktop
+      - install -Dm644 Source/GUI/Assimil8or/Data/377906243_984640136172516_2914152204379747274_n.png /app/share/icons/hicolor/512x512/apps/io.github.buddha314.A8Manager.png
+    sources:
+      - type: dir
+        path: ../..
