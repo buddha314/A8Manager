@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=A8Manager
+GenericName=Assimil8or Preset Manager
+Comment=Manage Rossum Electro-Music Assimil8or presets and sample files
+Exec=A8Manager %F
+Icon=io.github.buddha314.A8Manager
+Terminal=false
+Categories=Audio;AudioVideo;Music;
+StartupNotify=true
