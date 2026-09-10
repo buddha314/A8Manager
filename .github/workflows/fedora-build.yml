@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    name: Fedora 44 CMake build
+    name: Fedora 44 CMake debug build
     runs-on: ubuntu-latest
     container: fedora:44
 
@@ -30,10 +30,10 @@ jobs:
           submodules: recursive
 
       - name: Configure
-        run: cmake -S . -B cmake_build -DCMAKE_BUILD_TYPE=Release
+        run: cmake -S . -B cmake_build -DCMAKE_BUILD_TYPE=Debug
 
       - name: Build
-        run: cmake --build cmake_build --config Release --parallel 2
+        run: cmake --build cmake_build --config Debug --parallel 2
 
       - name: Inspect binary dependencies
-        run: ldd cmake_build/A8Manager_artefacts/Release/A8Manager
+        run: ldd cmake_build/A8Manager_artefacts/Debug/A8Manager
