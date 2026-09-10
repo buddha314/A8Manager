@@ -12,6 +12,16 @@ Current packaging inventory:
 - Icon properties: 514x514 PNG, 8-bit RGBA
 - Existing Linux desktop metadata: none found
 
+AppImage smoke result:
+
+- Built artifact: `build/appimage/A8Manager-Release-x86_64.AppImage`
+- Artifact type: x86-64 static-pie ELF AppImage
+- Artifact size: 4.9M
+- Fedora smoke command: `APPIMAGE_EXTRACT_AND_RUN=1 timeout 10 build/appimage/A8Manager-Release-x86_64.AppImage`
+- Result: app ran until killed by `timeout 10`, with no immediate loader errors
+- Runtime note: emitted `ALSA lib seq_hw.c:540:(snd_seq_hw_open) [error.sequencer] open /dev/snd/seq failed: No such file or directory` in this environment
+- Packaging note: appimagetool warned that AppStream upstream metadata is missing
+
 Observed runtime library dependencies from `ldd`:
 
 - `libfontconfig.so.1`
@@ -74,4 +84,6 @@ Packaging-sensitive runtime areas found in source:
 - AppImage library bundling may miss indirect JUCE runtime dependencies -> validate with `ldd` and Fedora launch smoke.
 - Flatpak sandboxing may restrict file, audio, or MIDI access -> document required finish-args and test real workflows before release.
 - The existing 514x514 PNG is an unusual icon size -> package scripts may need to resize/copy it into standard icon directories.
+- AppImage smoke in environments without `/dev/snd/seq` emits an ALSA sequencer warning -> include MIDI/audio device checks in manual Fedora validation.
+- AppImage/AppStream metadata is incomplete -> add metainfo before Flatpak release quality validation.
 - CI Debug builds prove compile/link compatibility but not Release packaging performance -> packaging tasks should run Release builds explicitly.

@@ -56,6 +56,22 @@ The executable will be written under `cmake_build/A8Manager_artefacts/Release/`.
 
 This was verified on Fedora 44 KDE.
 
+## AppImage
+
+AppImage packaging is experimental and currently lives in `packaging/linux`. Build the Release executable first, then run:
+
+```
+packaging/linux/build-appimage.sh
+```
+
+The script expects `appimagetool` on `PATH`, or a path supplied with `APPIMAGETOOL=/path/to/appimagetool`. If appimagetool cannot download the AppImage runtime in your environment, pass a local runtime file with `APPIMAGE_RUNTIME=/path/to/runtime-x86_64`.
+
+To create only the AppDir layout for inspection, run:
+
+```
+packaging/linux/build-appimage.sh --appdir-only
+```
+
 I also did a quick test of this back in 2023 and published the results in a youtube video.
 [A8Manager Linux build verification video](https://www.youtube.com/watch?v=fk4RRMh7hZc)
 
