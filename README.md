@@ -72,6 +72,18 @@ To create only the AppDir layout for inspection, run:
 packaging/linux/build-appimage.sh --appdir-only
 ```
 
+## Flatpak
+
+Flatpak packaging is experimental and currently builds from the local source tree with the Freedesktop 26.08 runtime:
+
+```
+flatpak-builder --force-clean build/flatpak packaging/linux/io.github.buddha314.A8Manager.yml
+flatpak-builder --user --install --force-clean build/flatpak packaging/linux/io.github.buddha314.A8Manager.yml
+flatpak run io.github.buddha314.A8Manager
+```
+
+The manifest grants home and removable-media filesystem access for preset/sample workflows, PulseAudio for audio playback, and device access for early MIDI validation.
+
 I also did a quick test of this back in 2023 and published the results in a youtube video.
 [A8Manager Linux build verification video](https://www.youtube.com/watch?v=fk4RRMh7hZc)
 

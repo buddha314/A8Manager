@@ -8,7 +8,7 @@
 - [x] Add an AppImage build path that consumes the existing CMake Release artifact.
 - [x] Smoke-test the AppImage on Fedora.
 - [x] Document AppImage build and run commands.
-- [ ] Add a Flatpak manifest after AppImage is validated.
+- [x] Add a Flatpak manifest after AppImage is validated.
 - [ ] Smoke-test the Flatpak on Fedora.
-- [ ] Document Flatpak build and run commands.
-- [ ] Capture any generally useful CMake/Linux fixes as separate upstreamable candidates.
+- [x] Document Flatpak build and run commands.
+- [x] Capture any generally useful CMake/Linux fixes as separate upstreamable candidates.
