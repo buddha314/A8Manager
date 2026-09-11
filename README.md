@@ -77,6 +77,10 @@ packaging/linux/build-appimage.sh --appdir-only
 Flatpak packaging is experimental and currently builds from the local source tree with the Freedesktop 26.08 runtime:
 
 ```
+sudo dnf install flatpak-builder
+```
+
+```
 flatpak-builder --force-clean build/flatpak packaging/linux/io.github.buddha314.A8Manager.yml
 flatpak-builder --user --install --force-clean build/flatpak packaging/linux/io.github.buddha314.A8Manager.yml
 flatpak run io.github.buddha314.A8Manager
